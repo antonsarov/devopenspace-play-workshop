@@ -25,4 +25,12 @@ public class ApplicationTest extends WithApplication {
         Result result = route(request);
         assertEquals(OK, result.status());
     }
+
+    @Test
+    public void testRequestLogin() {
+        RequestBuilder request = new RequestBuilder().method(GET).uri("/login");
+        Result result = route(request);
+        assertEquals(OK, result.status());
+        assertTrue(contentAsString(result).contains("Login"));
+    }
 }
