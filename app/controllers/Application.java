@@ -11,4 +11,7 @@ public class Application extends Controller {
         return ok();
     }
 
+    public Result login() {
+        return ok("Login");
+    }
 }

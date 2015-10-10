@@ -33,4 +33,11 @@ public class ApplicationTest extends WithApplication {
         assertEquals(OK, result.status());
         assertTrue(contentAsString(result).contains("Login"));
     }
+
+    @Test
+    public void testRequestLoginView() {
+        Content html = views.html.login.render("DevBay");
+        assertEquals("text/html", html.contentType());
+        assertTrue(contentAsString(html).contains("DevBay"));
+    }
 }
