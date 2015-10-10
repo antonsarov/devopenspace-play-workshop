@@ -39,5 +39,6 @@ public class ApplicationTest extends WithApplication {
         Content html = views.html.login.render("DevBay");
         assertEquals("text/html", html.contentType());
         assertTrue(contentAsString(html).contains("DevBay"));
+        assertTrue(contentAsString(html).contains("<li>77</li>"));
     }
 }

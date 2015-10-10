@@ -12,6 +12,6 @@ public class Application extends Controller {
     }
 
     public Result login() {
-        return ok("Login");
+        return ok(login.render("DevBay"));
     }
 }
