@@ -1,0 +1,9 @@
+@(header: String)
+
+<h1>@header</h1>
+
+<a href="@routes.Application.index()">Home</a>
+
+@for(i <- 1 to 100) {
+    <li> @i</li>
+}
