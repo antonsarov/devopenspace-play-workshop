@@ -21,6 +21,11 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String username = dynamicForm.get("username");
         String password = dynamicForm.get("password");
-        return TODO;
+        if (username!=null && !username.trim().isEmpty()) {
+            if (password!=null && !password.trim().isEmpty()) {
+                return ok("You may pass!");
+            }
+        }
+        return forbidden("You shall not pass!");
     }
 }
