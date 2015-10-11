@@ -1,0 +1,5 @@
+@(session: play.mvc.Http.Session)
+
+<h1>Hello, @session("username")</h1>
+
+<a href="@routes.Application.logout()">Logout</a>

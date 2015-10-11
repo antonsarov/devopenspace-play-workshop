@@ -6,14 +6,16 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
 
+import util.Secured;
 import views.html.*;
 
 public class Application extends Controller {
 
     public static final Form<LoginData> loginForm = Form.form(LoginData.class);
 
+    @Security.Authenticated(Secured.class)
     public Result index() {
-        return ok();
+        return ok(index.render(session()));
     }
 
     public Result login() {
@@ -25,8 +27,14 @@ public class Application extends Controller {
         if (submittedForm.hasErrors()) {
             return badRequest(login.render(submittedForm));
         } else {
-            String username = submittedForm.get().getUsername();
-            return ok("Hello, " + username);
+            session().put(Secured.USERNAME_SESSION_KEY, submittedForm.get().getUsername());
+            return redirect(routes.Application.index());
+
         }
+    }
+
+    public Result logout() {
+        session().clear();
+        return redirect(routes.Application.index());
     }
 }
