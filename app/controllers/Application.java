@@ -1,5 +1,6 @@
 package controllers;
 
+import models.LoginData;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -8,6 +9,8 @@ import play.mvc.*;
 import views.html.*;
 
 public class Application extends Controller {
+
+    public static final Form<LoginData> loginForm = Form.form(LoginData.class);
 
     public Result index() {
         return ok();
@@ -18,14 +21,12 @@ public class Application extends Controller {
     }
 
     public Result doLogin() {
-        DynamicForm dynamicForm = Form.form().bindFromRequest();
-        String username = dynamicForm.get("username");
-        String password = dynamicForm.get("password");
-        if (username!=null && !username.trim().isEmpty()) {
-            if (password!=null && !password.trim().isEmpty()) {
-                return ok("You may pass!");
-            }
+        Form<LoginData> submittedForm = loginForm.bindFromRequest();
+        if (submittedForm.hasErrors()) {
+            return badRequest("Username and password validation failed.");
+        } else {
+            String username = submittedForm.get().getUsername();
+            return ok("Hello, " + username);
         }
-        return forbidden("You shall not pass!");
     }
 }
