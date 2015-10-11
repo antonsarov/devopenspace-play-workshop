@@ -17,13 +17,13 @@ public class Application extends Controller {
     }
 
     public Result login() {
-        return ok(login.render("DevBay"));
+        return ok(login.render(loginForm));
     }
 
     public Result doLogin() {
         Form<LoginData> submittedForm = loginForm.bindFromRequest();
         if (submittedForm.hasErrors()) {
-            return badRequest("Username and password validation failed.");
+            return badRequest(login.render(submittedForm));
         } else {
             String username = submittedForm.get().getUsername();
             return ok("Hello, " + username);

@@ -1,14 +1,20 @@
-@(header: String)
+@(loginForm: Form[LoginData])
 
 <html>
+    <head>
+        <title>DevBay</title>
+    </head>
     <body>
-        <h1>@header</h1>
+        <h1>DevBay</h1>
 
         <a href="@routes.Application.index()">Home</a>
 
         <form method="post" action="@routes.Application.doLogin()">
+            @if(loginForm.hasGlobalErrors) {
+                <span>@loginForm.globalError.message</span>
+            }
             <div>
-                <input type="text" name="username"/>
+                <input type="text" name="username" value="@loginForm("username").value"/>
             </div>
             <div>
                 <input type="password" name="password"/>
