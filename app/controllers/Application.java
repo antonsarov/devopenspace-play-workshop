@@ -1,6 +1,8 @@
 package controllers;
 
+import actors.MyWebSocketActor;
 import akka.actor.ActorSystem;
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Item;
 import models.LoginData;
 import play.*;
@@ -71,5 +73,9 @@ public class Application extends Controller {
     public Result showItem(Long id) {
         Item itemFromDb = Item.find.byId(id);
         return ok(item.render(itemFromDb));
+    }
+
+    public WebSocket<JsonNode> ws() {
+        return WebSocket.withActor(MyWebSocketActor::props);
     }
 }
