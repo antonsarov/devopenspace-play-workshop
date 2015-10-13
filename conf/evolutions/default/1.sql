@@ -6,6 +6,7 @@
 create table item (
   id                        bigint not null,
   name                      varchar(255),
+  image                     varchar(255),
   price                     decimal(38),
   constraint pk_item primary key (id))
 ;
