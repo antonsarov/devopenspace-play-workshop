@@ -1,5 +1,11 @@
-@(session: play.mvc.Http.Session)
+@(session: play.mvc.Http.Session, items: List[Item])
 
 <h1>Hello, @session("username")</h1>
+
+@items.map { item =>
+    <h3>@item.getName</h3>
+    <img src="@routes.Assets.versioned("images/"+item.getImage)"/>
+    <a href="@routes.Application.showItem(item.getId)">Bid on this item</a>
+}
 
 <a href="@routes.Application.logout()">Logout</a>

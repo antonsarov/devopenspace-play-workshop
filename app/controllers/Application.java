@@ -45,7 +45,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public Result index() {
-        return ok(index.render(session()));
+        return ok(index.render(session(), Item.find.all()));
     }
 
     public Result login() {
@@ -66,5 +66,10 @@ public class Application extends Controller {
     public Result logout() {
         session().clear();
         return redirect(routes.Application.index());
+    }
+
+    public Result showItem(Long id) {
+        Item itemFromDb = Item.find.byId(id);
+        return ok(item.render(itemFromDb));
     }
 }

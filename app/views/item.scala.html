@@ -1,0 +1,15 @@
+@(item: Item)
+
+@main("Item " + item.getName) {
+    <div ng-controller="ItemCtrl">
+        <ul ng-repeat="item in items">
+            <li>
+            <h3>{{item.name}}</h3>
+            <h4>{{item.price}}</h4>
+            <h4>{{item.id}}</h4>
+            <input type="text" name="bid" ng-model="item.bid">
+            <button ng-click="doSend(item)">Bid</button>
+            </li>
+        </ul>
+    </div>
+}
